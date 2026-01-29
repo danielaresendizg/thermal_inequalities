@@ -91,6 +91,7 @@
       margin: 0 auto;
     }
 
+    /* Idiomas */
     .lang { display: none; }
     .lang.active { display: block; }
 
@@ -105,12 +106,37 @@
       cursor: pointer;
       border-radius: 6px;
     }
+
+    /* PDF embed styling (optional) */
+    .pdf-wrap {
+      margin-top: 40px;
+    }
+    iframe.pdf {
+      width: 100%;
+      height: 600px;
+      border: none;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
   <button class="toggle-btn" onclick="toggleLang()">EN/ES</button>
 
   <div class="wrap">
+
+    <!-- ================= IMAGE (GITHUB) ================= -->
+    <div class="center">
+      <img
+        class="responsive"
+        src="https://raw.githubusercontent.com/danielaresendizg/thermal_inequalities/main/thermal_inequality.png"
+        alt="Thermal inequality in Mexico City"
+        width="100%"
+      >
+      <div class="source">
+        <p>Thermal inequality map, Mexico City.</p>
+      </div>
+    </div>
 
     <!-- ================= ENGLISH VERSION ================= -->
     <div id="en" class="lang active">
@@ -179,6 +205,18 @@
         <p>A partir de esta evidencia, la tesis propone objetivos concretos de adaptación: garantizar sombra durante la mayor parte de las horas de caminata al mediodía, ofrecer refugios frescos cada pocas manzanas y reducir significativamente la carga radiante en corredores clave.</p>
 
         <p>En conjunto, la investigación ofrece un marco que traduce la ciencia climática en objetivos medibles de diseño urbano, y posiciona el calor no solo como un desafío ambiental sino como una cuestión de justicia y habitabilidad urbana—relevante para otras ciudades de gran altitud y rápido crecimiento en el mundo.</p>
+      </div>
+    </div>
+
+    <!-- ================= PDF (GOOGLE DRIVE) ================= -->
+    <div class="center pdf-wrap">
+      <iframe
+        class="pdf"
+        src="https://drive.google.com/file/d/1fcELU0UhXwPOdfsaRYojZ62eg4Bjs8Ax/preview"
+        allow="autoplay"
+      ></iframe>
+      <div class="source">
+        <p>Full thesis document (Google Drive).</p>
       </div>
     </div>
 
