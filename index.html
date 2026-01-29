@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Urban Heat in Mexico City: Coupling remote sensing, morphology, and microclimate simulation to analyse urban heat</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000000;
+      color: #fdf8f6;
+      font-family: "Helvetica", "Helvetica", "serif";
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #e2e0e0;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    header.hero h1 {
+      font-size: clamp(1.8rem, 4vw, 1.8rem);
+      line-height: 1.2;
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 1rem;
+    }
+
+    header.hero p.deck {
+      font-size: 1.05rem;
+      color: #e2e1e4;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    .byline {
+      font-size: 1rem;
+      color: #ffff00;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 600;
+    }
+
+    .method {
+      font-size: 0.7rem;
+      color: #ffff00;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+
+    .content p {
+      font-size: 1rem;
+      margin: 1.2rem 0;
+      text-align: justify;
+      font-weight: 200;
+    }
+
+    .source p {
+      font-size: 0.6rem;
+      margin: 1.2rem 0;
+      text-align: center;
+      font-weight: 200;
+    }
+
+    .content strong {
+      font-weight: 700;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    img.responsive {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .lang { display: none; }
+    .lang.active { display: block; }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleLang()">EN/ES</button>
+
+  <div class="wrap">
+
+    <!-- ================= ENGLISH VERSION ================= -->
+    <div id="en" class="lang active">
+      <header class="hero">
+        <div class="kicker">Urban heat • Thermal inequality • Climate adaptation</div>
+        <h1>
+         Calor urbano y desigualdad térmica:<br>
+         Articulando teledetección, morfología y simulación microclimática para analizar el calor urbano
+        </h1>
+        <div class="byline">By Daniela Reséndiz</div>
+        <div class="method">
+          Methods: Satellite analysis, urban morphology, census data, spatial statistics, and microclimatic simulation
+        </div>
+        <p class="deck">
+          <strong>Cities are facing a rapid rise in extreme heat,
+          yet we still know little about how it is experienced
+          on the very streets where urban life unfolds.</strong>
+          This thesis examines Mexico City to understand where
+          and why heat concentrates, and what this means for equity
+          and urban design.
+        </p>
+      </header>
+
+      <div class="content">
+        <p>The study focuses on the intra-urban distribution of heat and its intersection with social vulnerability at block and corridor scales. The analysis combines ten summers of satellite observations and meteorological data with census information and measures of urban form and configuration, extending down to microclimatic simulations that capture heat intensity at the pedestrian scale.</p>
+
+        <p>Three dynamics stand out. First, under the city’s dry air and strong irradiance, mean radiant temperature—rather than surface or air temperature—governs midday heat stress for people on the ground. Second, exposure to heat is not neutral: it overlaps with concentrations of older adults, people with disabilities, and households without cars, producing a geography of thermal vulnerability.</p>
+
+        <p>Third, the most accessible spaces—integrated streets and compact urban typologies—are also the hottest, meaning that daily life often takes place in the very areas of greatest risk.</p>
+
+        <p>From this evidence, the thesis proposes concrete adaptation targets: ensuring shade during most midday walking hours, providing cool refuges every few blocks, and significantly reducing radiant load along key corridors.</p>
+
+        <p>Taken together, the research offers a framework that translates climate science into measurable urban design objectives, and positions heat not only as an environmental challenge but as a matter of justice and urban liveability—relevant to other high-altitude, fast-growing cities worldwide.</p>
+      </div>
+    </div>
+
+    <!-- ================= SPANISH VERSION ================= -->
+    <div id="es" class="lang">
+      <header class="hero">
+        <div class="kicker">Calor urbano • Desigualdad térmica • Adaptación climática</div>
+        <h1>
+          Calor urbano y desigualdad térmica:<br>
+          Un análisis multi-escalar de la exposición al calor en Ciudad de México
+        </h1>
+        <div class="byline">Por Daniela Reséndiz</div>
+        <div class="method">
+          Métodos: análisis satelital, morfología urbana, datos censales, estadística espacial y simulación microclimática
+        </div>
+        <p class="deck">
+          <strong>Las ciudades enfrentan un rápido aumento del calor extremo,
+          pero aún sabemos poco sobre cómo se vive en las calles
+          donde se desarrolla la vida urbana.</strong>
+          Esta tesis analiza Ciudad de México para entender
+          dónde y por qué se concentra el calor,
+          y qué implica esto para la equidad y el diseño urbano.
+        </p>
+      </header>
+
+      <div class="content">
+        <p>El estudio se centra en la distribución intraurbana del calor y su intersección con la vulnerabilidad social a escala de manzana y corredor. El análisis combina diez veranos de observaciones satelitales y datos meteorológicos con información censal y medidas de forma y configuración urbana, extendiéndose hasta simulaciones microclimáticas que capturan la intensidad térmica a escala peatonal.</p>
+
+        <p>Tres dinámicas destacan. En primer lugar, bajo el aire seco y la fuerte irradiación de la ciudad, la temperatura radiante media—más que la temperatura del aire o de la superficie—es la que gobierna el estrés térmico al mediodía para las personas en el espacio público. En segundo lugar, la exposición al calor no es neutral: se superpone con concentraciones de personas mayores, personas con discapacidad y hogares sin automóvil, produciendo una geografía de vulnerabilidad térmica.</p>
+
+        <p>En tercer lugar, los espacios más accesibles—calles integradas y tipologías urbanas compactas—son también los más calientes, lo que significa que la vida cotidiana suele desarrollarse precisamente en las áreas de mayor riesgo.</p>
+
+        <p>A partir de esta evidencia, la tesis propone objetivos concretos de adaptación: garantizar sombra durante la mayor parte de las horas de caminata al mediodía, ofrecer refugios frescos cada pocas manzanas y reducir significativamente la carga radiante en corredores clave.</p>
+
+        <p>En conjunto, la investigación ofrece un marco que traduce la ciencia climática en objetivos medibles de diseño urbano, y posiciona el calor no solo como un desafío ambiental sino como una cuestión de justicia y habitabilidad urbana—relevante para otras ciudades de gran altitud y rápido crecimiento en el mundo.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleLang(){
+      document.getElementById("en").classList.toggle("active");
+      document.getElementById("es").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
