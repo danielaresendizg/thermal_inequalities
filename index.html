@@ -9,9 +9,9 @@
     body {
       margin: 0;
       padding: 0;
-      background: #000000;
-      color: #fdf8f6;
-      font-family: "Helvetica", "Helvetica", "serif";
+      background: #ffffff;
+      color: #000000;
+      font-family: Helvetica, Arial, serif;
       line-height: 1.6;
     }
 
@@ -26,84 +26,86 @@
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.05em;
-      color: #e2e0e0;
+      color: #000000;
       text-align: center;
       margin-bottom: 1rem;
     }
 
-    /* Title in MonaLisa Bold (uses your chosen display font name) */
-    header.hero h1{
-      font-family: "MonaLisa", "Helvetica", serif;
+    /* Title + Author = code font bold (black) */
+    header.hero h1 {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: clamp(1.8rem, 4vw, 1.8rem);
       line-height: 1.2;
-      font-weight: 800; /* bold */
+      font-weight: 800;
       text-align: center;
       margin: 0 0 1rem;
+      color: #000000;
     }
 
-    /* Name in MonaLisa Bold */
-    .byline{
-      font-family: "MonaLisa", "Helvetica", serif;
+    .byline {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 1rem;
-      color: #ffff00;
+      color: #000000;
       text-align: center;
       margin-bottom: 0.8rem;
-      font-weight: 800; /* bold */
+      font-weight: 800;
     }
 
-    /* Methods in MonaLisa Regular */
-    .method{
-      font-family: "MonaLisa", "Helvetica", serif;
-      font-size: 0.7rem;
-      color: #ffff00;
+    /* Methods = code font regular (black) */
+    .method {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      color: #000000;
       text-align: center;
       margin-bottom: 0.8rem;
-      font-weight: 400; /* regular */
+      font-weight: 400;
     }
 
-    /* GitHub link moved up: directly under Methods */
-    .drive-link{
+    /* GitHub link directly under methods */
+    .drive-link {
       margin-top: 0.4rem;
       margin-bottom: 2.6rem;
       text-align: center;
     }
 
-    .drive-link a{
-      color: #ffff00;
+    .drive-link a {
+      color: #000000;
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      border-bottom: 1px solid #ffff00;
+      border-bottom: 1px solid #000000;
       padding-bottom: 4px;
     }
 
-    header.hero p.deck{
+    header.hero p.deck {
       font-size: 1.05rem;
-      color: #e2e1e4;
+      color: #000000;
       text-align: center;
       max-width: 680px;
       margin: 0 auto 2rem;
     }
 
-    .content p{
+    .content p {
       font-size: 1rem;
       margin: 1.2rem 0;
       text-align: justify;
       font-weight: 200;
+      color: #000000;
     }
 
-    .source p{
-      font-size: 0.6rem;
+    .source p {
+      font-size: 0.85rem;
       margin: 1.2rem 0;
       text-align: center;
       font-weight: 200;
+      color: #000000;
     }
 
-    .content strong{ font-weight: 700; }
+    .content strong { font-weight: 700; }
 
-    .center{ text-align: center; }
+    .center { text-align: center; }
 
-    img.responsive{
+    img.responsive {
       max-width: 100%;
       height: auto;
       display: block;
@@ -113,16 +115,18 @@
     .lang { display: none; }
     .lang.active { display: block; }
 
-    .toggle-btn{
+    .toggle-btn {
       position: fixed;
       top: 10px;
       right: 10px;
-      background: #222;
-      color: #fff;
-      border: none;
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
       padding: 6px 12px;
       cursor: pointer;
       border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight: 700;
     }
   </style>
 </head>
@@ -150,7 +154,6 @@
           Methods: Satellite analysis, urban morphology, census data, spatial statistics, and microclimatic simulation
         </div>
 
-        <!-- GitHub link moved under Methods -->
         <div class="drive-link">
           <a href="https://github.com/danielaresendizg/urban-heat-mexico-city" target="_blank" rel="noopener noreferrer">
             Link Github's repository
@@ -208,7 +211,6 @@
           Métodos: análisis satelital, morfología urbana, datos censales, estadística espacial y simulación microclimática
         </div>
 
-        <!-- GitHub link moved under Methods -->
         <div class="drive-link">
           <a href="https://github.com/danielaresendizg/urban-heat-mexico-city" target="_blank" rel="noopener noreferrer">
             Link repositorio Github
