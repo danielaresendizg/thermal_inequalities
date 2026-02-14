@@ -3,237 +3,226 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Urban Heat in Mexico City: Coupling remote sensing, morphology, and microclimate simulation to analyse urban heat</title>
+  <title>MonaLisa</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000000;
-      color: #fdf8f6;
-      font-family: "Helvetica", "Helvetica", "serif";
-      line-height: 1.6;
+    body{
+      margin:0;
+      padding:0;
+      background:#ffffff;
+      color:#000000;
+      font-family: Helvetica, Arial, serif;
+      line-height:1.6;
     }
 
-    .wrap {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 40px 20px;
+    .wrap{
+      max-width:780px;
+      margin:0 auto;
+      padding:40px 20px;
     }
 
-    .kicker {
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: #e2e0e0;
-      text-align: center;
-      margin-bottom: 1rem;
+    .kicker{
+      text-transform:uppercase;
+      font-size:0.85rem;
+      font-weight:600;
+      letter-spacing:0.05em;
+      color:#333333;
+      text-align:center;
+      margin-bottom:1rem;
     }
 
-    header.hero h1 {
-      font-size: clamp(1.8rem, 4vw, 1.8rem);
-      line-height: 1.2;
-      font-weight: 800;
-      text-align: center;
-      margin: 0 0 1rem;
+    header.hero h1{
+      font-size:clamp(1.8rem, 4vw, 2.2rem);
+      line-height:1.2;
+      font-weight:800;
+      text-align:center;
+      margin:0 0 1rem;
+      color:#000000;
     }
 
-    header.hero p.deck {
-      font-size: 1.05rem;
-      color: #e2e1e4;
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 2rem;
+    header.hero p.deck{
+      font-size:1.05rem;
+      color:#111111;
+      text-align:center;
+      max-width:680px;
+      margin:0 auto 2rem;
     }
 
-    .byline {
-      font-size: 1rem;
-      color: #ffff00;
-      text-align: center;
-      margin-bottom: 3rem;
-      font-weight: 600;
+    .byline{
+      font-size:1rem;
+      color:#000000;
+      text-align:center;
+      margin-bottom:1rem;
+      font-weight:600;
     }
 
-    .method {
-      font-size: 0.7rem;
-      color: #ffff00;
-      text-align: center;
-      margin-bottom: 3rem;
-      font-weight: 400;
+    .method{
+      font-size:0.85rem;
+      color:#333333;
+      text-align:center;
+      margin-bottom:2.5rem;
+      font-weight:400;
     }
 
-    .content p {
-      font-size: 1rem;
-      margin: 1.2rem 0;
-      text-align: justify;
-      font-weight: 200;
+    .content p{
+      font-size:1rem;
+      margin:1.2rem 0;
+      text-align:justify;
+      font-weight:400;
+      color:#000000;
     }
 
-    .source p {
-      font-size: 0.6rem;
-      margin: 1.2rem 0;
-      text-align: center;
-      font-weight: 200;
+    .content strong{ font-weight:700; }
+
+    .center{ text-align:center; }
+
+    img.responsive{
+      max-width:100%;
+      height:auto;
+      display:block;
+      margin:0 auto;
     }
 
-    .content strong {
-      font-weight: 700;
+    .source{ margin-top:10px; }
+    .source p{
+      font-size:0.85rem;
+      margin:0.8rem 0 0;
+      text-align:center;
+      font-weight:400;
+      color:#111111;
+    }
+    .source em{
+      font-style:italic;
+      color:#333333;
     }
 
-    .center {
-      text-align: center;
+    /* Languages */
+    .lang{ display:none; }
+    body.lang-en .lang.en{ display:block; }
+    body.lang-es .lang.es{ display:block; }
+
+    .toggle-btn{
+      position:fixed;
+      top:10px;
+      right:10px;
+      background:#f2f2f2;
+      color:#000;
+      border:1px solid #cccccc;
+      padding:8px 12px;
+      cursor:pointer;
+      border-radius:8px;
+      font-weight:600;
     }
 
-    img.responsive {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* Idiomas */
-    .lang { display: none; }
-    .lang.active { display: block; }
-
-    .toggle-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #222;
-      color: #fff;
-      border: none;
-      padding: 6px 12px;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-
-    /* PDF embed styling (optional) */
-    .pdf-wrap {
-      margin-top: 40px;
-    }
-    iframe.pdf {
-      width: 100%;
-      height: 600px;
-      border: none;
-      display: block;
-      margin: 0 auto;
+    a.repo-link{
+      color:#000000;
+      font-weight:600;
+      text-decoration:underline;
     }
   </style>
 </head>
-<body>
-  <button class="toggle-btn" onclick="toggleLang()">EN/ES</button>
+
+<body class="lang-en">
+  <button class="toggle-btn" onclick="toggleLang()" aria-label="Toggle language">EN/ES</button>
 
   <div class="wrap">
 
-
-
     <!-- ================= ENGLISH VERSION ================= -->
-    <div id="en" class="lang active">
+    <div class="lang en">
       <header class="hero">
         <div class="kicker">Urban heat • Thermal inequality • Climate adaptation</div>
-        <h1>
-         Urban Heat in Mexico City:<br>
-         Coupling remote sensing, morphology, and microclimate simulation to analyse urban heat
-        </h1>
+        <h1>MonaLisa</h1>
         <div class="byline">By Daniela Reséndiz</div>
         <div class="method">
           Methods: Satellite analysis, urban morphology, census data, spatial statistics, and microclimatic simulation
         </div>
-        <p class="deck">
-          <strong>Cities are facing a rapid rise in extreme heat,
-          yet we still know little about how it is experienced
-          on the very streets where urban life unfolds.</strong>
-          This thesis examines Mexico City to understand where
-          and why heat concentrates, and what this means for equity
-          and urban design.
-        </p>
       </header>
 
       <div class="content">
-        <p>The study focuses on the intra-urban distribution of heat and its intersection with social vulnerability at block and corridor scales. The analysis combines ten summers of satellite observations and meteorological data with census information and measures of urban form and configuration, extending down to microclimatic simulations that capture heat intensity at the pedestrian scale.</p>
+        <p>The 2025 Lancet Countdown reports that heat related mortality has risen by 23% since the 1990s and that heat exposure led to 640 billion potential labour hours lost in 2024 (Romanello et al., 2025). This paper examines how extreme heat compounds existing social inequalities in Mexico City and develops an operational pathway for delivering cooling where it yields the greatest social benefit.</p>
 
-        <p>Three dynamics stand out. First, under the city’s dry air and strong irradiance, mean radiant temperature—rather than surface or air temperature—governs midday heat stress for people on the ground. Second, exposure to heat is not neutral: it overlaps with concentrations of older adults, people with disabilities, and households without cars, producing a geography of thermal vulnerability.</p>
+        <p>We integrate a decade of summer satellite observations with block level census indicators to estimate daytime air temperature across the entire city. Results indicate systematic exposure disparities: older adults, disabled residents and households without a car are disproportionately located in hotter blocks, commonly experiencing daytime conditions around 2 to 3 ◦C above the citywide mean, with particularly pronounced concentrations in eastern and central boroughs.</p>
 
-        <p>Third, the most accessible spaces—integrated streets and compact urban typologies—are also the hottest, meaning that daily life often takes place in the very areas of greatest risk.</p>
+        <p>Moving beyond surface mapping, we test whether thermal exposure aligns with the city’s everyday movement structure. By combining street-network configuration (Space Syntax) with built-form descriptors (Space Matrix), we show that high-exposure areas also contain highly connected, heavily traversed corridors. In effect, the pedestrian spines that organise daily access and through-movement frequently coincide with elevated heat burden, while compact districts with limited tree cover and scarce public open space intensify local hotspots.</p>
 
-        <p>From this evidence, the thesis proposes concrete adaptation targets: ensuring shade during most midday walking hours, providing cool refuges every few blocks, and significantly reducing radiant load along key corridors.</p>
+        <p>At the pedestrian scale, microclimate simulations clarify the dominant mechanism of discomfort: radiant load from the sun and heated urban surfaces. Simulations along representative corridors show that mean radiant temperature (Tmrt) drives thermal stress during the 10:00 to 14:00 period, and that continuous shade provision (via canopies, tree cover or well designed shelters) can substantially moderate perceived heat even when ambient air temperatures remain high.</p>
 
-        <p>Taken together, the research offers a framework that translates climate science into measurable urban design objectives, and positions heat not only as an environmental challenge but as a matter of justice and urban liveability—relevant to other high-altitude, fast-growing cities worldwide.</p>
+        <p>The contribution is a screening workflow that translates evidence into implementable targets. By jointly considering demographic vulnerability, local temperature variation and network centrality, the method identifies priority corridors where interventions are likely to protect the most exposed groups and the largest numbers of pedestrians. We specify measurable performance objectives to support delivery and evaluation: shade along most of the 10:00 to 14:00 walking window, cooling refuges at 300 to 500 m intervals, and material and building choices that reduce radiant heating without creating glare.</p>
+
+        <p>The approach avoids costly citywide microclimate modelling, providing a practical tool for local authorities to diagnose risk rapidly, prioritise socially sensitive and highly trafficked streets, and track progress through outcome focused indicators. Although grounded in Mexico City’s high altitude context, the framework is transferable to fast growing cities facing similar heat and equity challenges.</p>
+      </div>
+
+      <!-- ================= IMAGE + CAPTION (EN) ================= -->
+      <div class="center" style="margin-top:32px;">
+        <img
+          class="responsive"
+          src="https://raw.githubusercontent.com/danielaresendizg/thermal_inequalities/main/heatwaves_cdmx.webp"
+          alt="Thermal inequality in Mexico City"
+        >
+        <div class="source">
+          <p>Heat wave at the Monumento a la Revolución in Mexico City. Photograph: Future Publishing/Getty Images. <em>Source: WIRED en Español</em></p>
+        </div>
+      </div>
+
+      <!-- ================= LINK (EN) ================= -->
+      <div class="center" style="margin-top:40px;">
+        <a class="repo-link" href="https://github.com/danielaresendizg/urban-heat-mexico-city" target="_blank" rel="noopener noreferrer">
+          Link to GitHub repository
+        </a>
       </div>
     </div>
 
     <!-- ================= SPANISH VERSION ================= -->
-    <div id="es" class="lang">
+    <div class="lang es">
       <header class="hero">
         <div class="kicker">Calor urbano • Desigualdad térmica • Adaptación climática</div>
-        <h1>
-          Calor urbano y desigualdad térmica:<br>
-          Un análisis multi-escalar de la exposición al calor en Ciudad de México
-        </h1>
+        <h1>MonaLisa</h1>
         <div class="byline">Por Daniela Reséndiz</div>
         <div class="method">
           Métodos: análisis satelital, morfología urbana, datos censales, estadística espacial y simulación microclimática
         </div>
-        <p class="deck">
-          <strong>Las ciudades enfrentan un rápido aumento del calor extremo,
-          pero aún sabemos poco sobre cómo se vive en las calles
-          donde se desarrolla la vida urbana.</strong>
-          Esta tesis analiza Ciudad de México para entender
-          dónde y por qué se concentra el calor,
-          y qué implica esto para la equidad y el diseño urbano.
-        </p>
       </header>
 
       <div class="content">
-        <p>El estudio se centra en la distribución intraurbana del calor y su intersección con la vulnerabilidad social a escala de manzana y corredor. El análisis combina diez veranos de observaciones satelitales y datos meteorológicos con información censal y medidas de forma y configuración urbana, extendiéndose hasta simulaciones microclimáticas que capturan la intensidad térmica a escala peatonal.</p>
+        <p>El informe Lancet Countdown 2025 reporta que la mortalidad relacionada con el calor ha aumentado 23% desde la década de 1990 y que la exposición al calor provocó la pérdida de 640 mil millones de horas potenciales de trabajo en 2024 (Romanello et al., 2025). Este trabajo analiza cómo el calor extremo agrava desigualdades sociales existentes en la Ciudad de México y desarrolla una ruta operativa para implementar enfriamiento donde genere el mayor beneficio social.</p>
 
-        <p>Tres dinámicas destacan. En primer lugar, bajo el aire seco y la fuerte irradiación de la ciudad, la temperatura radiante media—más que la temperatura del aire o de la superficie—es la que gobierna el estrés térmico al mediodía para las personas en el espacio público. En segundo lugar, la exposición al calor no es neutral: se superpone con concentraciones de personas mayores, personas con discapacidad y hogares sin automóvil, produciendo una geografía de vulnerabilidad térmica.</p>
+        <p>Integramos una década de observaciones satelitales de verano con indicadores censales a nivel de manzana para estimar la temperatura diurna del aire en toda la ciudad. Los resultados indican disparidades sistemáticas de exposición: las personas mayores, las personas con discapacidad y los hogares sin automóvil se ubican de manera desproporcionada en manzanas más calientes, experimentando comúnmente condiciones diurnas alrededor de 2 a 3 °C por encima de la media de la ciudad, con concentraciones particularmente marcadas en alcaldías del oriente y del centro.</p>
 
-        <p>En tercer lugar, los espacios más accesibles—calles integradas y tipologías urbanas compactas—son también los más calientes, lo que significa que la vida cotidiana suele desarrollarse precisamente en las áreas de mayor riesgo.</p>
+        <p>Más allá del mapeo superficial, probamos si la exposición térmica se alinea con la estructura cotidiana de movimiento de la ciudad. Al combinar la configuración de la red de calles (Space Syntax) con descriptores de forma construida (Space Matrix), mostramos que las zonas de alta exposición también contienen corredores altamente conectados y muy transitados. En efecto, las “espinas” peatonales que organizan el acceso diario y el flujo de paso con frecuencia coinciden con una carga térmica elevada, mientras que distritos compactos con poca cobertura arbórea y escasez de espacio público abierto intensifican los puntos calientes locales.</p>
 
-        <p>A partir de esta evidencia, la tesis propone objetivos concretos de adaptación: garantizar sombra durante la mayor parte de las horas de caminata al mediodía, ofrecer refugios frescos cada pocas manzanas y reducir significativamente la carga radiante en corredores clave.</p>
+        <p>A escala peatonal, las simulaciones microclimáticas aclaran el mecanismo dominante de incomodidad: la carga radiante del sol y de las superficies urbanas calentadas. Las simulaciones a lo largo de corredores representativos muestran que la temperatura radiante media (Tmrt) impulsa el estrés térmico durante el periodo de 10:00 a 14:00, y que la provisión continua de sombra (mediante toldos, arbolado o refugios bien diseñados) puede moderar sustancialmente el calor percibido incluso cuando la temperatura del aire se mantiene alta.</p>
 
-        <p>En conjunto, la investigación ofrece un marco que traduce la ciencia climática en objetivos medibles de diseño urbano, y posiciona el calor no solo como un desafío ambiental sino como una cuestión de justicia y habitabilidad urbana—relevante para otras ciudades de gran altitud y rápido crecimiento en el mundo.</p>
+        <p>La contribución es un flujo de “screening” que traduce la evidencia en objetivos implementables. Al considerar conjuntamente la vulnerabilidad demográfica, la variación térmica local y la centralidad en la red, el método identifica corredores prioritarios donde las intervenciones probablemente protejan a los grupos más expuestos y a los mayores volúmenes de peatones. Especificamos objetivos de desempeño medibles para apoyar la implementación y evaluación: sombra durante la mayor parte de la ventana de caminata de 10:00 a 14:00, refugios frescos cada 300 a 500 m, y elecciones de materiales y diseño de edificios que reduzcan el calentamiento radiante sin generar deslumbramiento.</p>
+
+        <p>El enfoque evita el costoso modelado microclimático a escala ciudad, ofreciendo una herramienta práctica para que autoridades locales diagnostiquen riesgos rápidamente, prioricen calles socialmente sensibles y de alto flujo peatonal, y den seguimiento al progreso mediante indicadores enfocados en resultados. Aunque está fundamentado en el contexto de gran altitud de la Ciudad de México, el marco es transferible a ciudades de rápido crecimiento que enfrentan retos similares de calor y equidad.</p>
+      </div>
+
+      <!-- ================= IMAGE + CAPTION (ES) ================= -->
+      <div class="center" style="margin-top:32px;">
+        <img
+          class="responsive"
+          src="https://raw.githubusercontent.com/danielaresendizg/thermal_inequalities/main/heatwaves_cdmx.webp"
+          alt="Desigualdad térmica en Ciudad de México"
+        >
+        <div class="source">
+          <p>Ola de calor en el Monumento a la Revolución en México. Fotografía: Future Publishing/Getty Images. <em>Fuente: WIRED en Español</em></p>
+        </div>
+      </div>
+
+      <!-- ================= LINK (ES) ================= -->
+      <div class="center" style="margin-top:40px;">
+        <a class="repo-link" href="https://github.com/danielaresendizg/urban-heat-mexico-city" target="_blank" rel="noopener noreferrer">
+          Link repositorio GitHub
+        </a>
       </div>
     </div>
-
-        <!-- ================= IMAGE (GITHUB) ================= -->
-    <div class="center">
-      <img
-        class="responsive"
-        src="https://raw.githubusercontent.com/danielaresendizg/thermal_inequalities/main/thermal_inequality.png"
-        alt="Thermal inequality in Mexico City"
-        width="100%"
-      >
-      <div class="source">
-        <p>Thermal inequality map, Mexico City.</p>
-      </div>
-    </div>
-
-<div class="center" style="margin-top:40px;">
-  <div id="en" class="lang active">
-    <a href="https://github.com/danielaresendizg/urban-heat-mexico-city"
-       target="_blank"
-       style="color:#ffff00; font-weight:600; text-decoration:none;">
-       Link Github's repository
-    </a>
-  </div>
-
-  <div id="es" class="lang">
-    <a href="https://github.com/danielaresendizg/urban-heat-mexico-city"
-       target="_blank"
-       style="color:#ffff00; font-weight:600; text-decoration:none;">
-       Link repositorio Github
-    </a>
-  </div>
-</div>
 
   </div>
 
   <script>
     function toggleLang(){
-      document.getElementById("en").classList.toggle("active");
-      document.getElementById("es").classList.toggle("active");
+      const body = document.body;
+      body.classList.toggle("lang-en");
+      body.classList.toggle("lang-es");
     }
   </script>
 </body>
