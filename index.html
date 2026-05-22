@@ -4,112 +4,238 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Thermal Inequalities in Mexico City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0; padding: 0;
-      background: #000; color: #fff;
+      background: #000;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       line-height: 1.7;
+      height: 100dvh;
+      overflow: hidden;
     }
-    .wrap { max-width: 780px; margin: 0 auto; padding: 40px 20px 80px; }
-    .back { display:inline-block; font-size:.75rem; color:#aaa; text-decoration:none; letter-spacing:.05em; text-transform:uppercase; margin-bottom:32px; }
-    .back:hover { color:#fff; }
-    .kicker { text-transform:uppercase; font-size:0.75rem; font-weight:400; letter-spacing:.08em; color:#aaa; text-align:center; margin-bottom:1rem; }
-    header.hero h1 {
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: clamp(1.4rem, 4vw, 1.8rem);
-      line-height: 1.2; font-weight: 700; text-align:center;
-      margin: 0 0 1rem; color: #fff;
+
+    /* Atlas iframe — full screen, blurred background */
+    #atlas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 0;
+      filter: blur(8px) brightness(0.2);
+      transform: scale(1.05);
+      pointer-events: none;
+      transition: filter 700ms ease, transform 700ms ease;
     }
-    .byline { font-size:.9rem; color:#aaa; text-align:center; margin-bottom:.6rem; font-weight:400; }
-    .method { font-size:0.75rem; color:#aaa; text-align:center; margin-bottom:.8rem; }
-    .drive-link { margin:.4rem 0 2.6rem; text-align:center; }
-    .drive-link a { color:#00fff9; font-size:.9rem; text-decoration:underline; text-underline-offset:3px; }
-    .drive-link a:hover { opacity:.7; }
-    header.hero p.deck { font-size:1rem; color:#fff; text-align:center; max-width:680px; margin:0 auto 2rem; }
-    .content p { font-size:.95rem; margin:1.2rem 0; text-align:justify; font-weight:300; color:#ddd; }
-    .content strong { font-weight:400; color:#fff; }
-    .source p { font-size:0.6rem; margin:.8rem 0; text-align:center; font-weight:300; color:#666; }
-    .center { text-align:center; }
-    img.responsive { max-width:100%; height:auto; display:block; margin:0 auto; }
-    .lang { display:none; }
-    .lang.active { display:block; }
+    #atlas.active {
+      filter: none;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    /* Two-column intro overlay */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100dvh;
+      transition: opacity 700ms ease;
+    }
+
+    /* Left: text */
+    .col-text {
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 5vw, 120px) clamp(28px, 5vw, 100px);
+      overflow-y: auto;
+    }
+
+    /* Right: photo */
+    .col-image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 40px 40px 0;
+      gap: 8px;
+    }
+    .col-image img {
+      width: 100%;
+      max-height: 55vh;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.05);
+    }
+    .col-image figcaption {
+      font-family: 'Inconsolata', monospace;
+      font-size: clamp(.5rem, 0.55vw, .72rem);
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      line-height: 1.5;
+      width: 100%;
+    }
+
+    /* Fixed UI */
+    #back-chip {
+      position: fixed; top: 16px; left: 16px; z-index: 9999;
+      display: none; background: #00FF00; color: #000;
+      font-family: 'Inconsolata', monospace;
+      font-size: clamp(.55rem, 0.6vw, .8rem); font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: 5px 12px; text-decoration: none;
+    }
+    #back-chip:hover { opacity: .8; }
+
     .toggle-btn {
-      position:fixed; top:12px; right:12px;
-      background:transparent; color:#aaa;
-      border:1px solid #aaa; padding:5px 10px;
-      cursor:pointer; font-family:inherit; font-size:.75rem;
-      letter-spacing:.05em;
+      position: fixed; top: 16px; right: 16px; z-index: 9999;
+      background: #00FF00; color: #000; border: none;
+      padding: 5px 12px; cursor: pointer;
+      font-family: 'Inconsolata', monospace;
+      font-size: clamp(.55rem, 0.6vw, .8rem); font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
     }
-    .toggle-btn:hover { color:#fff; border-color:#fff; }
-    @media (max-width:600px) { .wrap { padding: 24px 16px 60px; } }
+    .toggle-btn:hover { opacity: .8; }
+
+    /* Language */
+    .lang { display: none; }
+    .lang.active { display: contents; }
+
+    /* Typography */
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(1rem, 1.4vw, 1.9rem);
+      line-height: 1.3; font-weight: 400;
+      color: #fff;
+      margin-bottom: clamp(.9rem, 1.2vw, 1.6rem);
+      text-shadow: 0 1px 10px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1);
+    }
+
+    .content p {
+      font-size: clamp(.72rem, 0.85vw, 1.05rem);
+      color: rgba(255,255,255,0.75); font-weight: 300;
+      line-height: 1.75; margin-bottom: clamp(.6rem, 0.7vw, .9rem);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    }
+    .content p:last-child { margin-bottom: 0; }
+    .content strong { font-weight: 600; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,1); }
+
+    /* Button */
+    .explore-btn {
+      margin-top: clamp(1.2rem, 1.5vw, 2rem);
+      display: inline-block;
+      background: #00FF00; color: #000;
+      font-family: 'Inconsolata', monospace;
+      font-size: clamp(.6rem, 0.7vw, .9rem); font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      padding: clamp(7px, 0.6vw, 11px) clamp(14px, 1.2vw, 22px);
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .explore-btn:hover { opacity: .8; }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      body { overflow: auto; height: auto; }
+      #intro { position: relative; grid-template-columns: 1fr; height: auto; }
+      .col-image { height: 55vw; order: -1; padding: 16px 16px 0; }
+      .col-text { padding: 32px 24px; }
+    }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleLang()">EN/ES</button>
 
-  <div class="wrap">
+  <iframe id="atlas" src="https://danielaresendizg.github.io/urban-heat-mexico-city/" title="Urban Heat Atlas"></iframe>
 
-    <a class="back" href="https://danielaresendizg.github.io/en/projects.html">← Projects</a>
+  <a id="back-chip" href="#"></a>
+  <button class="toggle-btn" id="toggle-btn" onclick="toggleLang()">ES</button>
 
-    <!-- ENGLISH -->
-    <div id="en" class="lang active">
-      <header class="hero">
-        <div class="kicker">Urban heat · Thermal inequality · Climate adaptation</div>
-        <h1>Thermal inequalities in Mexico City:<br>Coupling remote sensing, urban morphology and microclimate simulation to analyse urban heat exposure</h1>
-        <div class="byline">By Daniela Reséndiz</div>
-        <div class="method">Methods: Satellite analysis, urban morphology, census data, spatial statistics, and microclimatic simulation</div>
-        <div class="drive-link">
-          <a href="https://danielaresendizg.github.io/urban-heat-mexico-city/" target="_blank" rel="noopener noreferrer">Project and Atlas Viewer (in Spanish) →</a>
+  <div id="intro">
+
+    <div class="col-text">
+
+      <!-- ENGLISH -->
+      <div id="en" class="lang active">
+        <h1>Thermal inequalities in Mexico City: Coupling remote sensing, urban morphology and microclimate simulation to analyse urban heat exposure</h1>
+        <div class="content">
+          <p><strong>Keywords:</strong> Satellite analysis, urban morphology, census data, spatial statistics, microclimate simulation</p>
+          <p>The 2025 Lancet Countdown reports that heat-related mortality has risen by 23% since the 1990s and that heat exposure led to 640 billion potential labour hours lost in 2024. This paper examines how extreme heat compounds existing social inequalities in Mexico City and develops an operational pathway for delivering cooling where it yields the greatest social benefit.</p>
+          <p>We integrate a decade of summer satellite observations with block-level census indicators to estimate daytime air temperature across the entire city. Results indicate systematic exposure disparities: older adults, disabled residents and households without a car are disproportionately located in hotter blocks, commonly experiencing daytime conditions around 2 to 3 °C above the citywide mean.</p>
+          <p>By combining street-network configuration (Space Syntax) with built-form descriptors (Space Matrix), we show that high-exposure areas also contain highly connected, heavily traversed corridors — identifying priority corridors where interventions are likely to protect the most exposed groups.</p>
         </div>
-        <p class="deck"><strong>The 2025 Lancet Countdown reports that heat related mortality has risen by 23% since the 1990s and that heat exposure led to 640 billion potential labour hours lost in 2024.</strong> This paper examines how extreme heat compounds existing social inequalities in Mexico City and develops an operational pathway for delivering cooling where it yields the greatest social benefit.</p>
-      </header>
-      <div class="content">
-        <p>We integrate a decade of summer satellite observations with block level census indicators to estimate daytime air temperature across the entire city. Results indicate systematic exposure disparities: older adults, disabled residents and households without a car are disproportionately located in hotter blocks, commonly experiencing daytime conditions around 2 to 3 °C above the citywide mean.</p>
-        <p>Moving beyond surface mapping, we test whether thermal exposure aligns with the city's everyday movement structure. By combining street-network configuration (Space Syntax) with built-form descriptors (Space Matrix), we show that high-exposure areas also contain highly connected, heavily traversed corridors.</p>
-        <p>At the pedestrian scale, microclimate simulations clarify the dominant mechanism of discomfort: radiant load from the sun and heated urban surfaces. Simulations show that mean radiant temperature (Tmrt) drives thermal stress during the 10:00 to 14:00 period.</p>
-        <p>The contribution is a screening workflow that translates evidence into implementable targets. By jointly considering demographic vulnerability, local temperature variation and network centrality, the method identifies priority corridors where interventions are likely to protect the most exposed groups.</p>
-        <p>The approach avoids costly citywide microclimate modelling, providing a practical tool for local authorities to diagnose risk rapidly and track progress through outcome focused indicators.</p>
+        <button class="explore-btn" onclick="enterAtlas()">→ Interactive atlas</button>
       </div>
-      <div class="center">
-        <img class="responsive" src="heatwaves_cdmx.webp" alt="Thermal inequality in Mexico City" width="100%">
-        <div class="source"><p>Heat wave at the Monumento a la Revolución in Mexico City. Photograph: Future Publishing/Getty Images. <em>Source: WIRED en Español</em></p></div>
+
+      <!-- SPANISH -->
+      <div id="es" class="lang">
+        <h1>Desigualdades térmicas en la Ciudad de México: Percepción remota, morfología urbana y simulación microclimática para analizar la exposición al calor urbano</h1>
+        <div class="content">
+          <p><strong>Palabras clave:</strong> Análisis satelital, morfología urbana, datos censales, estadística espacial, simulación microclimática</p>
+          <p>El informe Lancet Countdown 2025 reporta que la mortalidad relacionada con el calor ha aumentado 23% desde la década de 1990 y que la exposición al calor provocó la pérdida de 640 mil millones de horas potenciales de trabajo en 2024. Este trabajo analiza cómo el calor extremo agrava desigualdades sociales existentes en la Ciudad de México.</p>
+          <p>Integramos una década de observaciones satelitales de verano con indicadores censales a nivel de manzana para estimar la temperatura diurna del aire en toda la ciudad. Los resultados indican disparidades sistemáticas: personas mayores, con discapacidad y hogares sin automóvil se ubican de manera desproporcionada en manzanas más calientes, con condiciones diurnas de 2 a 3 °C sobre la media.</p>
+          <p>Al combinar la configuración de la red de calles (Space Syntax) con descriptores de forma construida (Space Matrix), identificamos corredores prioritarios donde las intervenciones protejan a los grupos más expuestos.</p>
+        </div>
+        <button class="explore-btn" onclick="enterAtlas()">→ Atlas interactivo</button>
       </div>
+
     </div>
 
-    <!-- SPANISH -->
-    <div id="es" class="lang">
-      <header class="hero">
-        <div class="kicker">Calor urbano · Desigualdad térmica · Adaptación climática</div>
-        <h1>Desigualdades térmicas en la Ciudad de México:<br>Percepción remota, morfología urbana y simulación microclimática para analizar la exposición al calor urbano</h1>
-        <div class="byline">Por Daniela Reséndiz</div>
-        <div class="method">Métodos: análisis satelital, morfología urbana, datos censales, estadística espacial y simulación microclimática</div>
-        <div class="drive-link">
-          <a href="https://danielaresendizg.github.io/urban-heat-mexico-city/" target="_blank" rel="noopener noreferrer">Proyecto y visor de capas →</a>
-        </div>
-        <p class="deck"><strong>El informe Lancet Countdown 2025 reporta que la mortalidad relacionada con el calor ha aumentado 23% desde la década de 1990 y que la exposición al calor provocó la pérdida de 640 mil millones de horas potenciales de trabajo en 2024.</strong> Este trabajo analiza cómo el calor extremo agrava desigualdades sociales existentes en la Ciudad de México.</p>
-      </header>
-      <div class="content">
-        <p>Integramos una década de observaciones satelitales de verano con indicadores censales a nivel de manzana para estimar la temperatura diurna del aire en toda la ciudad. Los resultados indican disparidades sistemáticas de exposición: las personas mayores, las personas con discapacidad y los hogares sin automóvil se ubican de manera desproporcionada en manzanas más calientes.</p>
-        <p>Más allá del mapeo superficial, probamos si la exposición térmica se alinea con la estructura cotidiana de movimiento de la ciudad. Al combinar la configuración de la red de calles (Space Syntax) con descriptores de forma construida (Space Matrix), mostramos que las zonas de alta exposición también contienen corredores altamente conectados.</p>
-        <p>A escala peatonal, las simulaciones microclimáticas muestran que la temperatura radiante media (Tmrt) impulsa el estrés térmico durante el periodo de 10:00 a 14:00, y que la provisión continua de sombra puede moderar sustancialmente el calor percibido.</p>
-        <p>La contribución es un flujo de screening que traduce la evidencia en objetivos implementables, identificando corredores prioritarios donde las intervenciones protejan a los grupos más expuestos.</p>
-        <p>El enfoque evita el costoso modelado microclimático a escala ciudad, ofreciendo una herramienta práctica para que autoridades locales diagnostiquen riesgos rápidamente.</p>
-      </div>
-      <div class="center">
-        <img class="responsive" src="heatwaves_cdmx.webp" alt="Desigualdad térmica en Ciudad de México" width="100%">
-        <div class="source"><p>Ola de calor en el Monumento a la Revolución en México. Fotografía: Future Publishing/Getty Images. <em>Fuente: WIRED en Español</em></p></div>
-      </div>
+    <div class="col-image">
+      <figure style="width:100%">
+        <img src="heatwaves_cdmx.webp" alt="Heat wave at Monumento a la Revolución, Mexico City">
+        <figcaption>Heat wave at the Monumento a la Revolución, Mexico City. Future Publishing / Getty Images</figcaption>
+      </figure>
     </div>
 
   </div>
 
   <script>
+    function enterAtlas() {
+      var intro = document.getElementById('intro');
+      var atlas = document.getElementById('atlas');
+      var toggleBtn = document.getElementById('toggle-btn');
+      intro.style.opacity = '0';
+      intro.style.pointerEvents = 'none';
+      atlas.classList.add('active');
+      setTimeout(function() {
+        intro.style.display = 'none';
+        toggleBtn.style.display = 'none';
+      }, 750);
+    }
+
+    var currentLang = "en";
     function toggleLang(){
       document.getElementById("en").classList.toggle("active");
       document.getElementById("es").classList.toggle("active");
+      currentLang = currentLang === "en" ? "es" : "en";
+      document.getElementById("toggle-btn").textContent = currentLang === "en" ? "ES" : "EN";
     }
+
+    (function(){
+      var p = new URLSearchParams(location.search);
+      if(p.get("ref")==="portfolio"){
+        var c = document.getElementById("back-chip");
+        var lang = p.get("lang");
+        c.textContent = lang==="es" ? "← Proyectos" : "← Projects";
+        c.href = lang==="es"
+          ? "https://danielaresendizg.github.io/es/projects.html"
+          : "https://danielaresendizg.github.io/en/projects.html";
+        c.style.display = "block";
+        if(lang==="es"){
+          document.getElementById("en").classList.remove("active");
+          document.getElementById("es").classList.add("active");
+          currentLang = "es";
+          document.getElementById("toggle-btn").textContent = "EN";
+        }
+      }
+    })();
   </script>
-<style>#back-chip{position:fixed;top:16px;left:16px;z-index:9999;display:none;background:#00FF00;color:#000;font-family:"Inconsolata",monospace;font-size:.58rem;font-weight:400;text-transform:uppercase;letter-spacing:.06em;padding:5px 12px;text-decoration:none;cursor:pointer;}#back-chip:hover{opacity:.8;}</style><a id="back-chip" href="#"></a><script>(function(){var p=new URLSearchParams(location.search);if(p.get("ref")==="portfolio"){var c=document.getElementById("back-chip");var lang=p.get("lang");c.textContent=lang==="es"?"← Proyectos":"← Projects";c.href=lang==="es"?"https://danielaresendizg.github.io/es/projects.html":"https://danielaresendizg.github.io/en/projects.html";c.style.display="block";}})();</script>
 </body>
 </html>
