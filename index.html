@@ -301,9 +301,10 @@
       if(p.get("ref")==="portfolio"){
         var c = document.getElementById("back-chip");
         c.textContent = lang==="es" ? "← Proyectos" : "← Projects";
+        var isMobile = window.innerWidth <= 768;
         c.href = lang==="es"
-          ? "https://danielaresendizg.github.io/es/projects.html"
-          : "https://danielaresendizg.github.io/en/projects.html";
+          ? (isMobile ? "https://danielaresendizg.github.io/es/index.html" : "https://danielaresendizg.github.io/es/projects.html")
+          : (isMobile ? "https://danielaresendizg.github.io/en/index.html" : "https://danielaresendizg.github.io/en/projects.html");
         c.style.display = "block";
       }
     })();
