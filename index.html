@@ -191,7 +191,7 @@
           <p>We integrate a decade of summer satellite observations with block-level census indicators to estimate daytime air temperature across the entire city. Results indicate systematic exposure disparities: older adults, disabled residents and households without a car are disproportionately located in hotter blocks, commonly experiencing daytime conditions around 2 to 3 °C above the citywide mean.</p>
           <p>By combining street-network configuration (Space Syntax) with built-form descriptors (Space Matrix), we show that high-exposure areas also contain highly connected, heavily traversed corridors — identifying priority corridors where interventions are likely to protect the most exposed groups.</p>
         </div>
-        <button class="explore-btn" onclick="enterAtlas('https://danielaresendizg.github.io/urban-heat-mexico-city/index_en.html')">→ Interactive atlas</button>
+        <button class="explore-btn" onclick="enterAtlas(ATLAS_EN)">→ Interactive atlas</button>
         <div class="award-chips">
           <span class="award-chip">Distinction (A+) · UCL 2025</span>
           <a class="award-chip" href="https://danielaresendizg.github.io/pdfs/Paper312_Resendiz_SSS15Malaysia2026.pdf" target="_blank">15th International Space Syntax Symposium · Kuala Lumpur 2026 →</a>
@@ -207,7 +207,7 @@
           <p>Integramos una década de observaciones satelitales de verano con indicadores censales a nivel de manzana para estimar la temperatura diurna del aire en toda la ciudad. Los resultados indican disparidades sistemáticas: personas mayores, con discapacidad y hogares sin automóvil se ubican de manera desproporcionada en manzanas más calientes, con condiciones diurnas de 2 a 3 °C sobre la media.</p>
           <p>Al combinar la configuración de la red de calles (Space Syntax) con descriptores de forma construida (Space Matrix), identificamos corredores prioritarios donde las intervenciones protejan a los grupos más expuestos.</p>
         </div>
-        <button class="explore-btn" onclick="enterAtlas('https://danielaresendizg.github.io/urban-heat-mexico-city/')">→ Atlas interactivo</button>
+        <button class="explore-btn" onclick="enterAtlas(ATLAS_ES)">→ Atlas interactivo</button>
         <div class="award-chips">
           <span class="award-chip">Distinción (A+) · UCL 2025</span>
           <a class="award-chip" href="https://danielaresendizg.github.io/pdfs/Paper312_Resendiz_SSS15Malaysia2026.pdf" target="_blank">15° Simposio Internacional Space Syntax · Kuala Lumpur 2026 →</a>
@@ -248,6 +248,9 @@
       document.getElementById("toggle-btn").textContent = currentLang === "en" ? "ES" : "EN";
     }
 
+    var ATLAS_ES = "https://danielaresendizg.github.io/urban-heat-mexico-city/";
+    var ATLAS_EN = "https://danielaresendizg.github.io/urban-heat-mexico-city/index_en.html";
+
     (function(){
       var p = new URLSearchParams(location.search);
       var lang = p.get("lang");
@@ -256,6 +259,9 @@
         document.getElementById("es").classList.add("active");
         currentLang = "es";
         document.getElementById("toggle-btn").textContent = "EN";
+        document.getElementById("atlas").src = ATLAS_ES;
+      } else {
+        document.getElementById("atlas").src = ATLAS_EN;
       }
       if(p.get("ref")==="portfolio"){
         var c = document.getElementById("back-chip");
