@@ -258,6 +258,10 @@
 
   <script>
     function enterAtlas(url) {
+      if (window.innerWidth <= 640) {
+        window.open(url, '_blank');
+        return;
+      }
       var atlas = document.getElementById('atlas');
       atlas.src = url;
       var intro = document.getElementById('intro');
