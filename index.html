@@ -250,20 +250,20 @@
 
     (function(){
       var p = new URLSearchParams(location.search);
+      var lang = p.get("lang");
+      if(lang === "es"){
+        document.getElementById("en").classList.remove("active");
+        document.getElementById("es").classList.add("active");
+        currentLang = "es";
+        document.getElementById("toggle-btn").textContent = "EN";
+      }
       if(p.get("ref")==="portfolio"){
         var c = document.getElementById("back-chip");
-        var lang = p.get("lang");
         c.textContent = lang==="es" ? "← Proyectos" : "← Projects";
         c.href = lang==="es"
           ? "https://danielaresendizg.github.io/es/projects.html"
           : "https://danielaresendizg.github.io/en/projects.html";
         c.style.display = "block";
-        if(lang==="es"){
-          document.getElementById("en").classList.remove("active");
-          document.getElementById("es").classList.add("active");
-          currentLang = "es";
-          document.getElementById("toggle-btn").textContent = "EN";
-        }
       }
     })();
   </script>
