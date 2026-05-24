@@ -207,6 +207,7 @@
   <iframe id="atlas" src="https://danielaresendizg.github.io/urban-heat-mexico-city/" title="Urban Heat Atlas"></iframe>
 
   <a id="back-chip" href="#"></a>
+  <button id="atlas-back" onclick="exitAtlas()" style="display:none;position:fixed;top:16px;left:16px;z-index:9999;background:#00FF00;color:#000;border:none;padding:5px 12px;cursor:pointer;font-family:'Inconsolata',monospace;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">← Back</button>
   <button class="toggle-btn" id="toggle-btn" onclick="toggleLang()">ES</button>
 
   <div id="intro">
@@ -262,17 +263,39 @@
         window.open(url, '_blank');
         return;
       }
-      var atlas = document.getElementById('atlas');
-      atlas.src = url;
-      var intro = document.getElementById('intro');
+      var atlas     = document.getElementById('atlas');
+      var intro     = document.getElementById('intro');
       var toggleBtn = document.getElementById('toggle-btn');
+      var backChip  = document.getElementById('back-chip');
+      var atlasBack = document.getElementById('atlas-back');
+      atlas.src = url;
       intro.style.opacity = '0';
       intro.style.pointerEvents = 'none';
       atlas.classList.add('active');
       setTimeout(function() {
         intro.style.display = 'none';
         toggleBtn.style.display = 'none';
+        backChip.style.display = 'none';
+        atlasBack.style.display = 'block';
+        atlasBack.textContent = currentLang === 'es' ? '← Regresar' : '← Back';
       }, 750);
+    }
+
+    function exitAtlas() {
+      var atlas     = document.getElementById('atlas');
+      var intro     = document.getElementById('intro');
+      var toggleBtn = document.getElementById('toggle-btn');
+      var atlasBack = document.getElementById('atlas-back');
+      var backChip  = document.getElementById('back-chip');
+      atlasBack.style.display = 'none';
+      atlas.classList.remove('active');
+      intro.style.display = '';
+      toggleBtn.style.display = '';
+      if (backChip.href && backChip.href !== '#') backChip.style.display = 'block';
+      setTimeout(function() {
+        intro.style.opacity = '1';
+        intro.style.pointerEvents = '';
+      }, 30);
     }
 
     var currentLang = "en";
